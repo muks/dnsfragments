@@ -105,7 +105,7 @@
     <abstract>
       <t>This document describes a method to transmit DNS messages over
       multiple UDP datagrams by fragmenting them at the application
-      layer.  The goal is to allow authoritative servers to successfully
+      layer.  The goal is to allow authoriative servers to successfully
       reply via UDP, even if problems in the network do not allow large
       packets or TCP/53 through .</t>
     </abstract>
@@ -131,7 +131,7 @@
 	<t>As a UDP datagram is transmitted in a single IP PDU, in theory 
 	the size of a UDP datagram (including various lower internet layer 
 	headers) can be as large as 64 KiB. But practically, if the datagram 
-	size exceeds the path MTU,then the datagram will either be fragmented 
+	size exceeds the path MTU, then the datagram will either be fragmented 
 	at the IP layer, or will be dropped in the middle. In the case of IPv6 
 	DNS packet is always fragmented by the sender. If a packet size 
 	exceeds the path MTU, Packet Too Big (PTB) ICMP message will be 
@@ -146,8 +146,9 @@
 	a maximum of 512 bytes. Although EDNS0<xref target="RFC6891" /> 
 	allows a initiator to advertise the capability of receiving lager 
 	packets(up to 4096 byte), it leads to fragmentation because practically 
-	most packets are limited to 1500 bytes long due to host-ethernet interfaces, 
-	or 1280 bytes long due to minimum IPv6 MTU in IPv6 stack <xref target="RFC3542" />. </t> 
+	most packets are limited to 1500 bytes long due to host-ethernet
+	interfaces, or 1280 bytes long due to minimum IPv6 MTU in IPv6 stack
+        <xref target="RFC3542" />.</t> 
 		 
 	<t>According to the DNS specification<xref target="RFC1123" />,if 
 	the DNS response message can not fit within the packets size limit, 
@@ -172,7 +173,7 @@
 	starting from introduction of IPv6, EDNS0 <xref target="SAC016"/>, 
 	and DNSSEC <xref target="SAC035"/>. The 512 byte DNS Maximum 
 	Transmission Unit has probably done more to retard the DNS than any 
-	other single factor.In current production network, DNSSEC with longer
+	other single factor. In current production network, DNSSEC with longer
 	Key (ZSK>1024B and KSK>2048B) will coin larger response 
 	packets no less than 1500B<xref target="T-DNS"/>. Especially during the 
 	KSK rollover process, the response to the query of DNSKEY RRset will be 
@@ -181,9 +182,9 @@
 	<t>When possible, we should avoid dropped packets, as this means the 
 	client must wait for a timeout, which is a high cost. For example, 
 	a validator behind a firewall suffers from the timeout with no response, 
-	if the firwall drops large EDNS0 packets and IP fragement. It may 
-	even cause disaster when the validator can not recieve response for 
-	new trust anchor KSK due to the extreme case of stupid middle box 
+	if the firwall drops large EDNS0 packets and IP fragments. It may 
+	even cause disaster when the validator can not receive responses for 
+	the new trust anchor KSK due to the extreme case of stupid middle box 
 	which also drop TCP/53.</t>
 		
 	<t>Since UDP requires fewer packets on the wire and less state on 
@@ -195,8 +196,7 @@
 	<t>Note that this mechanism is not necessary to replace all DNS 
 	transaction. It can be triggered by some event or used for 
 	special case like KSK rollover process. </t>
-
-	      </section>
+      </section>
     </section>
 
     <section title="DNS Message Fragmentation Method">
